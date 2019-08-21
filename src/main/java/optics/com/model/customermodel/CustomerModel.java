@@ -18,44 +18,30 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-@Entity
-@Table(name = "customer")
+@Entity(name="customer")
 public class CustomerModel {
 
-    @Column(name = "id")
     @Id
-    private UUID id;
-    @Column(name = "user_name")
-    private String userName ;
-    @Column(name = "address")
+    private UUID id= UUID.randomUUID();
+    private String customerName ;
     private String address ;
-    @Column(name = "date")
-    private Date date ;
-    @Column(name = "phone_number")
+    private String date ;
     private String phoneNumber ;
-    @Column(name = "prescribed_By_Doctor")
     private String prescribedByDoctor ;
-    @Column(name = "spherical")
     private double spherical ;
-    @Column(name = "cylindrical")
     private double cylindrical ;
-    @Column(name = "axis")
     private double axis ;
-    @Column(name = "vision")
     private double vision ;
-    @Column(name = "ipd")
     private double ipd ;
-    @Column(name = "bvd")
     private double bvd ;
-    @Column(name = "prision")
     private double prision ;
 
 
     public Customer toCustomer(CustomerModel customerModel){
        UUID id = customerModel.getId();
-       String userName = customerModel.getUserName();
+       String customerName = customerModel.getCustomerName();
        String address = customerModel.getAddress();
-       Date date =  customerModel.getDate();
+       String date =  customerModel.getDate();
        String phoneNumber = customerModel.getPhoneNumber();
        String prescribedByDoctor = customerModel.getPrescribedByDoctor();
         double spherical =  customerModel.getSpherical();
@@ -65,7 +51,7 @@ public class CustomerModel {
         double bvd = customerModel.getBvd();
         double vision = customerModel.getVision();
         double axis = customerModel.getAxis();
-       return new Customer(id,userName,address,date,phoneNumber,prescribedByDoctor,spherical,cylindirical,axis,vision,ipd,bvd,prision);
+       return new Customer(id,customerName,address,date,phoneNumber,prescribedByDoctor,spherical,cylindirical,axis,vision,ipd,bvd,prision);
 
     }
 }

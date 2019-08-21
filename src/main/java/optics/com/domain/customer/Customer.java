@@ -13,35 +13,21 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-@Entity
-@Table(name="customer")
+@Entity(name="customer")
 public class Customer {
-    @Column(name = "id")
     @Id
     private UUID id;
-    @Column(name = "user_name")
-    private String userName ;
-    @Column(name = "address")
+    private String customerName ;
     private String address ;
-    @Column(name = "date")
-    private Date date ;
-    @Column(name = "phone_number")
+    private String date ;
     private String phoneNumber ;
-    @Column(name = "prescribed_By_Doctor")
     private String prescribedByDoctor ;
-    @Column(name = "spherical")
     private double spherical ;
-    @Column(name = "cylindrical")
     private double cylindrical ;
-    @Column(name = "axis")
     private double axis ;
-    @Column(name = "vision")
     private double vision ;
-    @Column(name = "ipd")
     private double ipd ;
-    @Column(name = "bvd")
     private double bvd ;
-    @Column(name = "prision")
     private double prision ;
 
 
