@@ -11,8 +11,8 @@ public class CustomerHandler {
     @Autowired
     private CustomerServiceImpl customerService;
 
-    public CustomerHandler(){
-        this.customerService = new CustomerServiceImpl();
+    public CustomerHandler(CustomerServiceImpl customerService){
+        this.customerService = customerService;
     }
 
     public void save(CustomerModel customerModel) {

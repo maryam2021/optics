@@ -1,8 +1,7 @@
 package optics.com.service.customerservice;
 
 import optics.com.domain.customer.Customer;
-import optics.com.model.CustomerModel;
-import optics.com.repository.customerrepository.CustomerRepositoryImpl;
+import optics.com.repository.customerrepository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +9,10 @@ import org.springframework.stereotype.Service;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    private  CustomerRepositoryImpl customerRepository ;
+    private CustomerRepository customerRepository ;
 
-    public CustomerServiceImpl() {
-        this.customerRepository = new CustomerRepositoryImpl();
+    public CustomerServiceImpl(CustomerRepository customerRepository) {
+        this.customerRepository =customerRepository;
     }
 
 
