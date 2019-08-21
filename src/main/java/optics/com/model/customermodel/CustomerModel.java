@@ -1,4 +1,4 @@
-package optics.com.model;
+package optics.com.model.customermodel;
 
 
 

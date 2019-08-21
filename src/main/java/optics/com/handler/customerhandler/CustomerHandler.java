@@ -1,7 +1,7 @@
 package optics.com.handler.customerhandler;
 
 import optics.com.domain.customer.Customer;
-import optics.com.model.CustomerModel;
+import optics.com.model.customermodel.CustomerModel;
 import optics.com.service.customerservice.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
