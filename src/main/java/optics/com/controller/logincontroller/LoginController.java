@@ -14,10 +14,6 @@ public class LoginController {
     @Autowired
     private LoginHandler loginHandler;
 
-    public LoginController(){
-        this.loginHandler = new LoginHandler();
-    }
-
     @PostMapping(value = "/login")
     public AuthenticationReponseModel authenticate(@RequestBody LoginModel loginModel) {
        return loginHandler.authenticate(loginModel);

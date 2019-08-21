@@ -13,10 +13,6 @@ public class CustomerController {
     @Autowired
     private CustomerHandler customerHandler;
 
-    public CustomerController(){
-        this.customerHandler = new CustomerHandler();
-    }
-
     @PostMapping(value = "/save")
     public void save(@RequestBody CustomerModel customerModel) {
         customerHandler.save(customerModel);

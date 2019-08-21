@@ -13,9 +13,6 @@ public class LoginHandler {
     @Autowired
     private LoginServiceImpl loginServiceImpl;
 
-    public LoginHandler() {
-        this.loginServiceImpl = new LoginServiceImpl();
-    }
 
     public AuthenticationReponseModel authenticate(LoginModel loginModel) {
        return loginServiceImpl.authenticate(loginModel);
