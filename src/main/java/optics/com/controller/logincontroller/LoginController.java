@@ -15,7 +15,7 @@ public class LoginController {
     private LoginHandler loginHandler;
 
     @PostMapping(value = "/login")
-    public AuthenticationReponseModel authenticate(@RequestBody LoginModel loginModel) {
+    public AuthenticationReponseModel authenticate(@RequestBody LoginModel loginModel) throws Exception {
        return loginHandler.authenticate(loginModel);
     }
 

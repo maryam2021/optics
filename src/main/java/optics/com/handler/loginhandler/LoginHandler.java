@@ -14,7 +14,7 @@ public class LoginHandler {
     private LoginServiceImpl loginServiceImpl;
 
 
-    public AuthenticationReponseModel authenticate(LoginModel loginModel) {
+    public AuthenticationReponseModel authenticate(LoginModel loginModel) throws Exception {
        return loginServiceImpl.authenticate(loginModel);
     }
 }
