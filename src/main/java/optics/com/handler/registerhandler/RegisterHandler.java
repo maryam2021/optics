@@ -11,11 +11,7 @@ public class RegisterHandler {
     private RegisterServiceImpl registerServiceImpl;
 
     public void register(RegisterModel registerModel) throws Exception {
-        if(registerModel.getPassword().equals(registerModel.getConfirmPassword())) {
             registerServiceImpl.register(registerModel);
-        }
-        else {
-            throw new Exception("Password doesn't match");
-        }
+
     }
 }

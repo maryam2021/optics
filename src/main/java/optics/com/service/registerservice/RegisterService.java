@@ -3,5 +3,5 @@ package optics.com.service.registerservice;
 import optics.com.model.registermodel.RegisterModel;
 
 public interface RegisterService {
-    void register(RegisterModel registerModel);
+    void register(RegisterModel registerModel) throws Exception;
 }
