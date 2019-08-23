@@ -15,8 +15,8 @@ public class LoginServiceImpl  implements  LoginService{
     private RegiterRepository regiterRepository ;
 
     public AuthenticationReponseModel authenticate(LoginModel loginModel) throws Exception {
-        for(RegisterModel customer : getcustomer()){
-            if(loginModel.getUserName().equals(customer.getUserName())&& loginModel.getPassword().equals(customer.getPassword())){
+        for(RegisterModel users : getRegisterUser()){
+            if(loginModel.getUserName().equals(users.getUserName())&& loginModel.getPassword().equals(users.getPassword())){
                 return new AuthenticationReponseModel(loginModel.getUserName(),true);
             }
             else {
@@ -26,7 +26,7 @@ public class LoginServiceImpl  implements  LoginService{
         return null;
 
     }
-    private Iterable<RegisterModel> getcustomer(){
+    private Iterable<RegisterModel> getRegisterUser(){
       return regiterRepository.findAll();
     }
 }
