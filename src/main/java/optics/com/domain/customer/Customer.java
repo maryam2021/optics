@@ -11,7 +11,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-@Entity(name = "customer")
+@Entity(name="customer")
+
 public class Customer {
     @Id
     private UUID id ;
@@ -28,6 +29,5 @@ public class Customer {
     private double RightEyeCylindrical ;
     private double RightEyeAxis ;
     private double RightEyeVision ;
-
 
 }

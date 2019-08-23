@@ -1,4 +1,4 @@
-package optics.com.model;
+package optics.com.model.customermodel;
 
 
 
@@ -15,7 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-@Entity(name = "customer")
+
 public class CustomerModel {
 
     @Id
@@ -33,6 +33,7 @@ public class CustomerModel {
     private double RightEyeCylindrical ;
     private double RightEyeAxis ;
     private double RightEyeVision ;
+
 
 
     public Customer toCustomer(CustomerModel customerModel){
