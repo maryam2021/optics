@@ -13,20 +13,26 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Autowired
     private RegiterRepository regiterRepository;
+    List<RegisterModel> dbUser;
+    ;
+
 
     @Override
     public void register(RegisterModel registerModel) throws Exception {
-        for (RegisterModel duplicateusers : getDbUserName()) {
-            if (registerModel.getUserName().equals(duplicateusers.getUserName())) {
-                throw new Exception("already exists");
-            } else {
-                regiterRepository.save(registerModel);
+        if (regiterRepository.count() != 0) {
+            dbUser = (List<RegisterModel>) regiterRepository.findAll();
+            for (RegisterModel result : dbUser) {
+                if ((result.getUserName().contains(registerModel.getUserName()))) {
+                    throw new Exception("already exists");
+                }
             }
+            regiterRepository.save(registerModel);
 
+        } else {
+            regiterRepository.save(registerModel);
         }
-    }
 
-    private Iterable<RegisterModel> getDbUserName() {
-      return regiterRepository.findAll();
+
     }
 }
+
