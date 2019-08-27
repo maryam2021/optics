@@ -2,22 +2,27 @@ package optics.com.model.registermodel;
 
 
 import lombok.*;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.UUID;
+import optics.com.domain.register.Register;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity(name = "register")
 public class RegisterModel {
-    @Id
-    private UUID id = UUID.randomUUID();
+
+    private String id;
     private String userName;
     private String password;
     private String confirmPassword;
     private String phoneNumber;
+
+    public Register toRegister(RegisterModel registerModel){
+        String id = registerModel.getId();
+        String userName = registerModel.getUserName();
+         String password = registerModel.getPassword();
+         String confirmPassword = registerModel.getConfirmPassword();
+         String phoneNumber = registerModel.getPhoneNumber();
+        return new Register(id,userName,password,confirmPassword,phoneNumber);
+    }
 }
