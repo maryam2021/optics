@@ -7,26 +7,30 @@ import optics.com.repository.registerrepository.RegiterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class LoginServiceImpl  implements  LoginService{
+public class LoginServiceImpl  implements  LoginService {
 
 
     @Autowired
-    private RegiterRepository regiterRepository ;
+    private RegiterRepository regiterRepository;
+    List<RegisterModel> dbUser;
 
     public AuthenticationReponseModel authenticate(LoginModel loginModel) throws Exception {
-        for(RegisterModel users : getRegisterUser()){
-            if(loginModel.getUserName().equals(users.getUserName())&& loginModel.getPassword().equals(users.getPassword())){
-                return new AuthenticationReponseModel(loginModel.getUserName(),true);
-            }
-            else {
-                throw new Exception("invalid credentials");
+        dbUser = (List<RegisterModel>) regiterRepository.findAll();
+        for (RegisterModel user : dbUser) {
+            if (loginModel.getUserName().contains(user.getUserName()) && loginModel.getPassword().contains(user.getPassword())) {
+                return new AuthenticationReponseModel(loginModel.getUserName(), true);
             }
         }
-        return null;
+            throw new Exception("invalid credentials");
 
-    }
-    private Iterable<RegisterModel> getRegisterUser(){
-      return regiterRepository.findAll();
-    }
+        }
+
 }
+
+
+
+
+
