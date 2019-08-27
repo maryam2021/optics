@@ -9,12 +9,23 @@ import org.springframework.stereotype.Service;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    private CustomerRepository customerRepository ;
+    private CustomerRepository customerRepository;
+    Iterable<Customer> dbUser;
 
 
     @Override
     public void save(Customer customer) {
-     customerRepository.save(customer);
+        if(customerRepository.count() != 0){
+        dbUser = customerRepository.findAll();
+        for (Customer customers : dbUser) {
+            if (customers.getId().equals(customer.getId())) {
+                customerRepository.save(customer);
+            }
+        }
+        }
+        customerRepository.save(customer);
 
     }
+
+
 }
