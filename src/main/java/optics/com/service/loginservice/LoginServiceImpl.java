@@ -1,5 +1,6 @@
 package optics.com.service.loginservice;
 
+import optics.com.domain.register.Register;
 import optics.com.model.loginmodel.AuthenticationReponseModel;
 import optics.com.model.loginmodel.LoginModel;
 import optics.com.model.registermodel.RegisterModel;
@@ -15,11 +16,11 @@ public class LoginServiceImpl  implements  LoginService {
 
     @Autowired
     private RegiterRepository regiterRepository;
-    List<RegisterModel> dbUser;
+    Iterable<Register> dbUser;
 
     public AuthenticationReponseModel authenticate(LoginModel loginModel) throws Exception {
-        dbUser = (List<RegisterModel>) regiterRepository.findAll();
-        for (RegisterModel user : dbUser) {
+        dbUser = regiterRepository.findAll();
+        for (Register user : dbUser) {
             if (loginModel.getUserName().contains(user.getUserName()) && loginModel.getPassword().contains(user.getPassword())) {
                 return new AuthenticationReponseModel(loginModel.getUserName(), true);
             }

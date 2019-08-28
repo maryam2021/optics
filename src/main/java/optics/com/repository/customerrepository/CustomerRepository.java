@@ -8,5 +8,5 @@ import java.util.UUID;
 
 
 @Repository
-public interface CustomerRepository extends CrudRepository<Customer, UUID> {
+public interface CustomerRepository extends CrudRepository<Customer, String> {
 }

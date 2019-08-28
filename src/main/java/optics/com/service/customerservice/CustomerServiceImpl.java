@@ -5,23 +5,29 @@ import optics.com.repository.customerrepository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
-    Iterable<Customer> dbUser;
+    Optional<Customer> dbUser;
 
 
     @Override
     public void save(Customer customer) {
-        if(customerRepository.count() != 0){
-        dbUser = customerRepository.findAll();
-        for (Customer customers : dbUser) {
-            if (customers.getId().equals(customer.getId())) {
-                customerRepository.save(customer);
+        if(customerRepository.count()!=0) {
+            if(customer.getId()!= null) {
+                dbUser = customerRepository.findById(customer.getId());
+                if (dbUser.isPresent()) {
+                    customerRepository.save(customer);
+                }
             }
+            customerRepository.save(customer);
         }
+        else {
+            customerRepository.save(customer);
         }
         customerRepository.save(customer);
 
