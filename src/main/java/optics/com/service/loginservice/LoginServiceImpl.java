@@ -3,15 +3,12 @@ package optics.com.service.loginservice;
 import optics.com.domain.register.Register;
 import optics.com.model.loginmodel.AuthenticationReponseModel;
 import optics.com.model.loginmodel.LoginModel;
-import optics.com.model.registermodel.RegisterModel;
 import optics.com.repository.registerrepository.RegiterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class LoginServiceImpl  implements  LoginService {
+public class LoginServiceImpl implements LoginService {
 
 
     @Autowired
@@ -25,9 +22,9 @@ public class LoginServiceImpl  implements  LoginService {
                 return new AuthenticationReponseModel(loginModel.getUserName(), true);
             }
         }
-            throw new Exception("invalid credentials");
+        throw new Exception("invalid credentials");
 
-        }
+    }
 
 }
 
