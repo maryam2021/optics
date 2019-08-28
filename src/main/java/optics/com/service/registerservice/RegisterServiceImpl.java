@@ -23,7 +23,7 @@ public class RegisterServiceImpl implements RegisterService {
         if (regiterRepository.count() != 0) {
             dbUser = regiterRepository.findAll();
             for (Register result : dbUser) {
-                if ((result.getUserName().contains(register.getUserName()))) {
+                if ((result.getUserName().contains(register.getUserName().toLowerCase()))) {
                     throw new Exception("already exists");
                 }
             }
