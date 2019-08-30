@@ -17,4 +17,8 @@ public class RegisterHandler {
             registerServiceImpl.register(registerInfo);
 
     }
+
+    public void confirmUserAccount(String confirmationToken) throws Exception {
+        registerServiceImpl.confirmUserAccount(confirmationToken);
+    }
 }

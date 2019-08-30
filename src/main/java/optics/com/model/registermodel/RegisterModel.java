@@ -23,6 +23,6 @@ public class RegisterModel {
          String password = registerModel.getPassword();
          String confirmPassword = registerModel.getConfirmPassword();
          String email = registerModel.getEmail();
-        return new Register(id,userName,password,confirmPassword,email);
+        return new Register(id,userName,password,confirmPassword,email,false);
     }
 }

@@ -3,16 +3,15 @@ package optics.com.domain.register;
 import lombok.*;
 import org.apache.tomcat.jni.User;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-@Builder
 @Entity(name = "confirmation_token")
 public class ConfirmationToken {
     @Id
