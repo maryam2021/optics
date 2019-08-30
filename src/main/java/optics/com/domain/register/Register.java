@@ -24,5 +24,5 @@ public class Register {
     private String userName;
     private String password;
     private String confirmPassword;
-    private String phoneNumber;
+    private String email;
 }
