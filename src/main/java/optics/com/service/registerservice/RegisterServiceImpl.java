@@ -9,16 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 @Service
 public class RegisterServiceImpl implements RegisterService {
 
 
+    Iterable<Register> dbUser;
+    Iterable<ConfirmationToken> token;
     private ConfirmationToken confirmationToken;
-
-    public RegisterServiceImpl() {
-        this.confirmationToken = new ConfirmationToken();
-    }
 
     @Autowired
     private ConfirmationTokenRepository confirmationTokenRepository;
@@ -27,22 +26,19 @@ public class RegisterServiceImpl implements RegisterService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-
-    Iterable<Register> dbUser;
-    Iterable<ConfirmationToken> token;
-
     public void register(Register register) throws Exception {
+        confirmationToken = new ConfirmationToken(register);
         if (regiterRepository.count() != 0) {
             if (checkDuplicateUserName(register.getUserName()) || checkDuplicateUserEmail(register.getEmail())) {
                 throw new Exception("Already Exist username and email!");
             }
             regiterRepository.save(register);
-            confirmationTokenRepository.save(new ConfirmationToken(register));
-            sendEmail(register.getEmail());
+            confirmationTokenRepository.save(confirmationToken);
+            sendEmail(register.getEmail(), confirmationToken.getConfirmationToken());
         } else {
             regiterRepository.save(register);
-            confirmationTokenRepository.save(new ConfirmationToken(register));
-            sendEmail(register.getEmail());
+            confirmationTokenRepository.save(confirmationToken);
+            sendEmail(register.getEmail(), confirmationToken.getConfirmationToken());
 
         }
     }
@@ -86,19 +82,18 @@ public class RegisterServiceImpl implements RegisterService {
             if (register.getUserName().toLowerCase().equals(userName.toLowerCase())) {
                 isUserNameExist = true;
             }
-            break;
         }
         return isUserNameExist;
     }
 
 
-    private void sendEmail(String email) {
+    private void sendEmail(String email, String confirmationToken) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(email);
         mailMessage.setSubject("Complete Registration!");
         mailMessage.setFrom("hanakhan838@gmail.com");
         mailMessage.setText("To confirm your account, please click here : "
-                + "http://localhost:8080/confirm-account?token="+confirmationToken.getConfirmationToken());
+                + "http://localhost:8080/confirm-account/"+confirmationToken);
         javaMailSender.send(mailMessage);
     }
 
