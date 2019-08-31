@@ -98,7 +98,7 @@ public class RegisterServiceImpl implements RegisterService {
         mailMessage.setSubject("Complete Registration!");
         mailMessage.setFrom("hanakhan838@gmail.com");
         mailMessage.setText("To confirm your account, please click here : "
-                + "http://localhost:8082/confirm-account?token=" + confirmationToken.getConfirmationToken());
+                + "http://localhost:8080/confirm-account?token="+confirmationToken.getConfirmationToken());
         javaMailSender.send(mailMessage);
     }
 
