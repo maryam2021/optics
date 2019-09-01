@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 @Service
 public class RegisterServiceImpl implements RegisterService {
@@ -39,7 +38,6 @@ public class RegisterServiceImpl implements RegisterService {
             regiterRepository.save(register);
             confirmationTokenRepository.save(confirmationToken);
             sendEmail(register.getEmail(), confirmationToken.getConfirmationToken());
-
         }
     }
 
@@ -54,7 +52,7 @@ public class RegisterServiceImpl implements RegisterService {
                         if (istokenExist.getRegister().getId().equals(registeredUser.getId())) {
                             registeredUser.setEnabled(true);
                             regiterRepository.save(registeredUser);
-                            System.out.println("accountVerified");
+                            throw new Exception("accountVerified");
                         }
                     }
                 }
@@ -93,7 +91,7 @@ public class RegisterServiceImpl implements RegisterService {
         mailMessage.setSubject("Complete Registration!");
         mailMessage.setFrom("hanakhan838@gmail.com");
         mailMessage.setText("To confirm your account, please click here : "
-                + "http://localhost:8080/confirm-account/"+confirmationToken);
+                + "http://localhost:8080/confirm-account/" + confirmationToken);
         javaMailSender.send(mailMessage);
     }
 
