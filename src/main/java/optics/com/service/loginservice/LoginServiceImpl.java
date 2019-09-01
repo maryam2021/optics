@@ -18,7 +18,7 @@ public class LoginServiceImpl implements LoginService {
     public AuthenticationReponseModel authenticate(LoginModel loginModel) throws Exception {
         dbUser = regiterRepository.findAll();
         for (Register user : dbUser) {
-            if (loginModel.getUserName().contains(user.getUserName()) && loginModel.getPassword().contains(user.getPassword())) {
+            if (loginModel.getUserName().equals(user.getUserName()) && loginModel.getPassword().equals(user.getPassword()) && user.isEnabled()) {
                 return new AuthenticationReponseModel(loginModel.getUserName(), true);
             }
         }

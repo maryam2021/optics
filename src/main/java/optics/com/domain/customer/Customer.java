@@ -31,6 +31,6 @@ public class Customer {
     private double RightEyeCylindrical;
     private double RightEyeAxis;
     private double RightEyeVision;
-
+    private String customerShopName;
 
 }

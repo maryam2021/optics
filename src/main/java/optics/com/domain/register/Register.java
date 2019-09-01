@@ -4,9 +4,8 @@ package optics.com.domain.register;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 
 @Getter
@@ -24,5 +23,9 @@ public class Register {
     private String userName;
     private String password;
     private String confirmPassword;
-    private String phoneNumber;
+    private String email;
+    private boolean isEnabled;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
 }
