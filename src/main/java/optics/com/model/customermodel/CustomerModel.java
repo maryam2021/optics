@@ -32,7 +32,7 @@ public class CustomerModel {
 
     public Customer toCustomer(CustomerModel customerModel) {
         String id = customerModel.getId();
-        String userName = customerModel.getCustomerName();
+        String customerName = customerModel.getCustomerName();
         String address = customerModel.getAddress();
         String date = customerModel.getDate();
         String phoneNumber = customerModel.getPhoneNumber();
@@ -45,7 +45,7 @@ public class CustomerModel {
         double rightEyeCylindirical = customerModel.getRightEyeCylindrical();
         double rightEyeVision = customerModel.getRightEyeVision();
         double rightEyeAxis = customerModel.getRightEyeAxis();
-        return new Customer(id, userName, address, date, phoneNumber, prescribedByDoctor, leftEyeSpherical, leftEyeCylindirical,
+        return new Customer(id, customerName, address, date, phoneNumber, prescribedByDoctor, leftEyeSpherical, leftEyeCylindirical,
                 leftEyeAxis, leftEyeVision, rightEyeSpherical, rightEyeCylindirical, rightEyeVision, rightEyeAxis);
     }
 }
