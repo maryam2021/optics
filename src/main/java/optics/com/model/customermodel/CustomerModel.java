@@ -46,6 +46,6 @@ public class CustomerModel {
         double rightEyeVision = customerModel.getRightEyeVision();
         double rightEyeAxis = customerModel.getRightEyeAxis();
         return new Customer(id, customerName, address, date, phoneNumber, prescribedByDoctor, leftEyeSpherical, leftEyeCylindirical,
-                leftEyeAxis, leftEyeVision, rightEyeSpherical, rightEyeCylindirical, rightEyeVision, rightEyeAxis);
+                leftEyeAxis, leftEyeVision, rightEyeSpherical, rightEyeCylindirical, rightEyeVision, rightEyeAxis,null);
     }
 }
