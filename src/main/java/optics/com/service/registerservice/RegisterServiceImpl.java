@@ -52,6 +52,7 @@ public class RegisterServiceImpl implements RegisterService {
                         if (istokenExist.getRegister().getId().equals(registeredUser.getId())) {
                             registeredUser.setEnabled(true);
                             regiterRepository.save(registeredUser);
+                            regiterRepository.deleteConfirmationtoken(confirmationToken);
                             throw new Exception("accountVerified");
                         }
                     }
