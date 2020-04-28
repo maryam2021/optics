@@ -2,6 +2,8 @@ package optics.com.service.customerservice;
 
 import optics.com.domain.customer.Customer;
 import optics.com.domain.register.Register;
+import optics.com.model.ChangePasswordResponseModel;
+import optics.com.model.changepasswordmodel.ChangePasswordModel;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,4 +19,5 @@ public interface CustomerService {
     List<Customer> getAllCustomers();
 
     void deleteCustomer(String id);
+    ChangePasswordResponseModel changePassword(ChangePasswordModel changePasswordModel);
 }

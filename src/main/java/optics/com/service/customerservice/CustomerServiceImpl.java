@@ -2,9 +2,13 @@ package optics.com.service.customerservice;
 
 import optics.com.domain.customer.Customer;
 import optics.com.domain.register.Register;
+import optics.com.model.ChangePasswordResponseModel;
+import optics.com.model.changepasswordmodel.ChangePasswordModel;
 import optics.com.repository.customerrepository.CustomerRepository;
-
+import optics.com.repository.registerrepository.RegiterRepository;
+import optics.com.service.customerservice.customerconfig.CustomerContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +17,17 @@ import java.util.Optional;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
+    Optional<Customer> dbUser;
+    @Autowired
+    RegiterRepository regiterRepository;
     @Autowired
     private CustomerRepository customerRepository;
-//    @Autowired
+    @Autowired
+    private CustomerContext customerContext;
+    @Autowired
+    private JavaMailSender javaMailSender;
+    //    @Autowired
 //    private CustomerContext customerContext;
-    Optional<Customer> dbUser;
-
 
     @Override
     public void save(Customer customer) {
@@ -63,8 +72,20 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     private Optional<Register> getLoggedInUser() {
+        return customerContext.getCurrentEmployee(false);
+    }
+
+
+    @Override
+    public ChangePasswordResponseModel changePassword(ChangePasswordModel changePasswordModel) {
+//
         return null;
-      //  return customerContext.getCurrentEmployee(false);
+
+    }
+
+    public boolean isPasswordSame(ChangePasswordModel changePasswordModel, Optional<Register> loggedInEmployee) {
+        // return passwordEncoder.matches(changePasswordModel.getOldPassword(), loggedInEmployee.getPassword());
+        return true;
     }
 
 }

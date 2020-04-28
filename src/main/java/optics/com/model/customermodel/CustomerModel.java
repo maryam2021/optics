@@ -12,7 +12,7 @@ import optics.com.domain.customer.Customer;
 @Builder
 public class CustomerModel {
 
-    private String id;
+
     private String customerName;
     private String address;
     private String date;
@@ -28,7 +28,6 @@ public class CustomerModel {
     private double rightEyeVision;
 
     public CustomerModel(Customer customer) {
-        id = customer.getId();
         customerName = customer.getCustomerName();
         address = customer.getAddress();
         date = customer.getDate();
@@ -47,7 +46,6 @@ public class CustomerModel {
 
 
     public Customer toCustomer(CustomerModel customerModel) {
-        String id = customerModel.getId();
         String customerName = customerModel.getCustomerName();
         String address = customerModel.getAddress();
         String date = customerModel.getDate();
@@ -61,7 +59,7 @@ public class CustomerModel {
         double rightEyeCylindirical = customerModel.getRightEyeCylindrical();
         double rightEyeVision = customerModel.getRightEyeVision();
         double rightEyeAxis = customerModel.getRightEyeAxis();
-        return new Customer(id, customerName, address, date, phoneNumber, prescribedByDoctor, leftEyeSpherical, leftEyeCylindirical,
+        return new Customer(null, customerName, address, date, phoneNumber, prescribedByDoctor, leftEyeSpherical, leftEyeCylindirical,
                 leftEyeAxis, leftEyeVision, rightEyeSpherical, rightEyeCylindirical, rightEyeVision, rightEyeAxis, null);
     }
 }
