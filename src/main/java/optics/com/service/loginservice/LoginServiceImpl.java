@@ -3,7 +3,7 @@ package optics.com.service.loginservice;
 import optics.com.authentication.JwtTokenUtil;
 import optics.com.authentication.JwtUserDetailsService;
 import optics.com.domain.register.Register;
-import optics.com.model.loginmodel.AuthenticationReponse;
+import optics.com.model.loginmodel.AuthenticationResponse;
 import optics.com.model.loginmodel.LoginModel;
 import optics.com.repository.registerrepository.RegiterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,13 @@ public class LoginServiceImpl implements LoginService {
     private JwtUserDetailsService userDetailsService;
     Iterable<Register> dbUser;
 
-    public AuthenticationReponse authenticate(LoginModel loginModel) throws Exception {
+    public AuthenticationResponse authenticate(LoginModel loginModel) throws Exception {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(loginModel.getEmail());
         final String token = jwtTokenUtil.generateToken(userDetails);
         dbUser = regiterRepository.findAll();
         for (Register user : dbUser) {
-            if (loginModel.getEmail().equals(user.getUserName()) && loginModel.getPassword().equals(user.getPassword()) && user.isEnabled()) {
-                return new AuthenticationReponse(loginModel.getEmail(), true, token);
+            if (loginModel.getEmail().equals(user.getEmail()) && loginModel.getPassword().equals(user.getPassword()) && user.isEnabled()) {
+                return new AuthenticationResponse(loginModel.getEmail(), true, token);
             }
         }
         throw new Exception("invalid credentials");

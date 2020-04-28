@@ -3,6 +3,7 @@ package optics.com.authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -45,7 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/login","/register","/confirm-account/{token}").permitAll().
+                .authorizeRequests().antMatchers("/login", "/register", "/confirm-account/{token}").permitAll()
+                .antMatchers(HttpMethod.GET, "/**/api/v1").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/api/v1/customer/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/api/v1/register/**").hasRole("USER").
+
                 anyRequest().authenticated().and().
                 exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
