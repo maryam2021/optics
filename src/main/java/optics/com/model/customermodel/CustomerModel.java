@@ -22,12 +22,28 @@ public class CustomerModel {
     private double leftEyeCylindrical;
     private double leftEyeAxis;
     private double leftEyeVision;
-    private double RightEyeSpherical;
-    private double RightEyeCylindrical;
-    private double RightEyeAxis;
-    private double RightEyeVision;
+    private double rightEyeSpherical;
+    private double rightEyeCylindrical;
+    private double rightEyeAxis;
+    private double rightEyeVision;
 
+    public CustomerModel(Customer customer) {
+        id = customer.getId();
+        customerName = customer.getCustomerName();
+        address = customer.getAddress();
+        date = customer.getDate();
+        phoneNumber = customer.getPhoneNumber();
+        prescribedByDoctor = customer.getPrescribedByDoctor();
+        leftEyeSpherical = customer.getLeftEyeSpherical();
+        leftEyeCylindrical = customer.getLeftEyeCylindrical();
+        leftEyeVision = customer.getLeftEyeVision();
+        leftEyeAxis = customer.getLeftEyeAxis();
+        rightEyeSpherical = customer.getRightEyeSpherical();
+        rightEyeCylindrical = customer.getRightEyeCylindrical();
+        rightEyeVision = customer.getRightEyeVision();
+        rightEyeAxis = customer.getRightEyeAxis();
 
+    }
 
 
     public Customer toCustomer(CustomerModel customerModel) {
@@ -46,6 +62,6 @@ public class CustomerModel {
         double rightEyeVision = customerModel.getRightEyeVision();
         double rightEyeAxis = customerModel.getRightEyeAxis();
         return new Customer(id, customerName, address, date, phoneNumber, prescribedByDoctor, leftEyeSpherical, leftEyeCylindirical,
-                leftEyeAxis, leftEyeVision, rightEyeSpherical, rightEyeCylindirical, rightEyeVision, rightEyeAxis,null);
+                leftEyeAxis, leftEyeVision, rightEyeSpherical, rightEyeCylindirical, rightEyeVision, rightEyeAxis, null);
     }
 }

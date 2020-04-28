@@ -9,6 +9,6 @@ import lombok.*;
 @Setter
 @Builder
 public class LoginModel {
-    private String userName;
+    private String email;
     private String password;
 }

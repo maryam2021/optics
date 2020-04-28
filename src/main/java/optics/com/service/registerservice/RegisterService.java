@@ -12,5 +12,7 @@ public interface RegisterService {
 
     void confirmUserAccount(String confirmationToken) throws Exception;
 
+    Register findByUsername (String userName);
+
 
 }

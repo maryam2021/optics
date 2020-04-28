@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AuthenticationReponseModel {
+public class AuthenticationReponse {
    private String username;
    private boolean authenticate;
    private String token;

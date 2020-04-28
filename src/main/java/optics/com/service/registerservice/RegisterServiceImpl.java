@@ -28,16 +28,21 @@ public class RegisterServiceImpl implements RegisterService {
     public void register(Register register) throws Exception {
         confirmationToken = new ConfirmationToken(register);
         if (regiterRepository.count() != 0) {
-            if (checkDuplicateUserName(register.getUserName()) || checkDuplicateUserEmail(register.getEmail())) {
-                throw new Exception("Already Exist username and email!");
+            if (checkDuplicateUserName(register.getUserName())) {
+                throw new Exception("Already exist username");
+            }
+            if(checkDuplicateUserEmail(register.getEmail()))
+            {
+                throw new Exception("Already exist email!");
             }
             regiterRepository.save(register);
             confirmationTokenRepository.save(confirmationToken);
-            sendEmail(register.getEmail(), confirmationToken.getConfirmationToken());
+            //   sendEmail(register.getEmail(), confirmationToken.getConfirmationToken());
         } else {
             regiterRepository.save(register);
             confirmationTokenRepository.save(confirmationToken);
-            sendEmail(register.getEmail(), confirmationToken.getConfirmationToken());
+            //  sendEmail(register.getEmail(), confirmationToken.getConfirmationToken());
+
         }
     }
 
@@ -52,7 +57,7 @@ public class RegisterServiceImpl implements RegisterService {
                         if (istokenExist.getRegister().getId().equals(registeredUser.getId())) {
                             registeredUser.setEnabled(true);
                             regiterRepository.save(registeredUser);
-                            regiterRepository.deleteConfirmationtoken(confirmationToken);
+                            regiterRepository.deleteConfirmationToken(confirmationToken);
                             throw new Exception("accountVerified");
                         }
                     }
@@ -62,27 +67,24 @@ public class RegisterServiceImpl implements RegisterService {
         throw new Exception("message,The link is invalid or broken!");
     }
 
-
-    private boolean checkDuplicateUserEmail(String email) {
-        boolean isUserEmailExist = false;
+    @Override
+    public Register findByUsername(String email) {
         dbUser = regiterRepository.findAll();
         for (Register register : dbUser) {
             if (register.getEmail().equals(email)) {
-                isUserEmailExist = true;
+                return register;
             }
         }
-        return isUserEmailExist;
+        return null;
     }
 
-    private boolean checkDuplicateUserName(String userName) throws Exception {
-        boolean isUserNameExist = false;
-        dbUser = regiterRepository.findAll();
-        for (Register register : dbUser) {
-            if (register.getUserName().toLowerCase().equals(userName.toLowerCase())) {
-                isUserNameExist = true;
-            }
-        }
-        return isUserNameExist;
+
+    private Boolean checkDuplicateUserEmail(String email) {
+        return regiterRepository.existsByEmail(email);
+    }
+
+    private Boolean checkDuplicateUserName(String userName) throws Exception {
+        return regiterRepository.existsByUserName(userName);
     }
 
 
